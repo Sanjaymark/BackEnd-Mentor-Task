@@ -1,25 +1,39 @@
+import { ObjectId } from "bson";
 import { client } from "../db.js";
 
-export function getAllStudents(){
+export function getAllStudents(req){
     return client
     .db("bootcamp")
     .collection("students")
-    .find()
+    .find(req.query)
     .toArray();  
 }
 
-export function getStudentbyId(){
-
+export function getStudentbyId(id){
+    return client
+    .db("bootcamp")
+    .collection("students")
+    .findOne({_id: new ObjectId(id)})
 }
 
-export function addStudent(){
-
+export function addStudent(data){
+    return client
+    .db("bootcamp")
+    .collection("students")
+    .insertOne(data);
 }
 
-export function editStudentbyId(){
-
+export function editStudentbyId(id, data){
+    return client
+    .db("bootcamp")
+    .collection("students")
+    .findOneAndUpdate({_id: new ObjectId(id)}, {$set:data});
 }
 
-export function deleteStudentbyId(){
-
+export function deleteStudentbyId(id)
+{
+    return client
+    .db("bootcamp")
+    .collection("students")
+    .findOneAndDelete({_id: new ObjectId(id)})
 }
