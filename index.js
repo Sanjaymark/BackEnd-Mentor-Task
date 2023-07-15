@@ -1,6 +1,5 @@
-//import express from "express"
-const express = require("express");
-const fs = require("fs");
+import express from "express"
+
 //initlising server
 const app = express();
 
@@ -9,24 +8,7 @@ app.use(express.json());
 
 const PORT = 8080;
 
-//Server endpoint
-app.get("/file/date", (req, res) => {
-  let date = new Date();
-  let content = date.toUTCString();
-  fs.writeFile("./currentTime.txt", content, (err) => {
-    if (err) {
-      res.send("Error Occured", err);
-    } else {
-      fs.readFile("./currentTime.txt", "utf-8", (err, data) => {
-        if (err) {
-          res.send(`Error occured inm reading : ${err}`);
-        } else {
-          res.send(data);
-        }
-      });
-    }
-  });
-});
+
 
 // Hall booking
 
@@ -129,17 +111,18 @@ let filteredrooms = hallData.filter((room)=>room.bookingStatus == "booked");
 
 let bookedrooms = []
 
-for (i=0;i<filteredrooms.length;i++)
+for (let i=0;i<filteredrooms.length;i++)
 {
-   roomName = filteredrooms[i].roomName;
-   bookingStatus = filteredrooms[i].bookingStatus;
-   customerName = filteredrooms[i].customerName;
-   date = filteredrooms[i].date;
-   starttime = filteredrooms[i].starttime;
-   endtime = filteredrooms[i].endtime;
+  let roomName = filteredrooms[i].roomName;
+  let bookingStatus = filteredrooms[i].bookingStatus;
+  let customerName = filteredrooms[i].customerName;
+  let date = filteredrooms[i].date;
+  let starttime = filteredrooms[i].starttime;
+  let endtime = filteredrooms[i].endtime;
 
-   obj =[roomName,bookingStatus,customerName,date,starttime,endtime];
-   bookedrooms.push(obj);
+  let obj =[roomName,bookingStatus,customerName,date,starttime,endtime];
+   
+  bookedrooms.push(obj);
 }
 
 res.send(bookedrooms)
@@ -152,15 +135,15 @@ app.get("/bookedcustomers", (req, res) => {
 
   let bookedcustomers = []
 
-for (i=0;i<filteredcustomers.length;i++)
+for (let i=0;i<filteredcustomers.length;i++)
 {
-   roomName = filteredcustomers[i].roomName;
-   customerName = filteredcustomers[i].customerName;
-   date = filteredcustomers[i].date;
-   starttime = filteredcustomers[i].starttime;
-   endtime = filteredcustomers[i].endtime;
+  let roomName = filteredcustomers[i].roomName;
+  let customerName = filteredcustomers[i].customerName;
+  let date = filteredcustomers[i].date;
+  let starttime = filteredcustomers[i].starttime;
+  let endtime = filteredcustomers[i].endtime;
 
-   obj =[roomName,customerName,date,starttime,endtime];
+  let obj =[roomName,customerName,date,starttime,endtime];
    
    bookedcustomers.push(obj);
 }
@@ -175,16 +158,16 @@ app.get("/nooftimes", (req, res) => {
 
   let bookedtimes = [];
   
-  for (i=0;i<nooftimes.length;i++)
+  for (let i=0;i<nooftimes.length;i++)
   {
-    roomName = nooftimes[i].roomName;
-    customerName = nooftimes[i].customerName;
-    date = nooftimes[i].date;
-    starttime = nooftimes[i].starttime;
-    endtime = nooftimes[i].endtime;
-    bookingStatus = nooftimes[i].bookingStatus;
+    let roomName = nooftimes[i].roomName;
+    let customerName = nooftimes[i].customerName;
+    let date = nooftimes[i].date;
+    let starttime = nooftimes[i].starttime;
+    let endtime = nooftimes[i].endtime;
+    let bookingStatus = nooftimes[i].bookingStatus;
 
-    obj =[roomName,customerName,date,starttime,endtime,bookingStatus];
+    let obj =[roomName,customerName,date,starttime,endtime,bookingStatus];
    
     bookedtimes.push(obj);
   }
