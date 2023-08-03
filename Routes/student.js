@@ -28,6 +28,17 @@ router.post("/add", async (req,res)=>
 });
 
 
+//To get all students
+router.get('/all', async (req, res) => {
+    try {
+      const students = await Student.find();
+      return res.status(200).json(students);
+    } catch (error) {
+      console.error('Error fetching all students:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
 //To Change mentor for a student
 router.put("/:studentId/change-mentor", async (req,res) =>{
     try 
